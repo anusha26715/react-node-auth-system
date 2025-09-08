@@ -17,7 +17,7 @@ router.post("/register", async (req, res) => {
       [email, hashedPassword],
       function (err) {
         if (err) {
-          console.error("DB error on register:", err);
+          console.error("DB error on register:", err.message);
           return res.status(400).json({ error: "User already exists" });
         }
         res.json({ message: "User registered successfully" });
