@@ -26,13 +26,15 @@ app.use(
   })
 );
 
+app.set("trust proxy", 1);
+
 // ✅ Session setup (SQLite for persistence across restarts)
 app.use(
   session({
     store: new SQLiteStore({ db: "sessions.sqlite" }),
     secret: process.env.SESSION_SECRET || "defaultSecretKey",
-    resave: false,
-    saveUninitialized: false,
+    resave: true,
+    saveUninitialized: true,
     cookie: {
       httpOnly: true,
       secure: process.env.NODE_ENV === "production", // HTTPS only in prod
