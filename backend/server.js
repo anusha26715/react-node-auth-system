@@ -18,7 +18,10 @@ app.use(cookieParser());
 // ✅ CORS (Frontend URL from ENV for flexibility)
 app.use(
   cors({
-    origin: process.env.CLIENT_URL, // e.g., https://react-node-auth-system.vercel.app
+    origin: [
+      process.env.CLIENT_URL,     // ✅ Vercel frontend
+      "http://localhost:5000"     // ✅ local dev frontend
+    ],
     credentials: true,
   })
 );
@@ -60,3 +63,5 @@ process.on("uncaughtException", (err) => {
 process.on("unhandledRejection", (reason, promise) => {
   console.error("Unhandled Rejection at:", promise, "reason:", reason);
 });
+
+
